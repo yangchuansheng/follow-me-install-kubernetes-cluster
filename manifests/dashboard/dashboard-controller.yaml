@@ -21,7 +21,7 @@ spec:
       serviceAccountName: dashboard
       containers:
       - name: kubernetes-dashboard
-        image: cokabug/kubernetes-dashboard-amd64:v1.6.0
+        image: gcr.io/google_containers/kubernetes-dashboard-amd64:v1.6.0
         resources:
           # keep request = limit to keep this container in guaranteed class
           limits:
@@ -32,6 +32,9 @@ spec:
             memory: 50Mi
         ports:
         - containerPort: 9090
+        args:
+            #  - --apiserver-host=https://10.10.31.190:6443
+          - --heapster-host=http://heapster
         livenessProbe:
           httpGet:
             path: /
